@@ -10,7 +10,10 @@
    context: path.resolve(__dirname, 'src'),
    devtool: 'inline-source-map',
     devServer: {
-        contentBase: './dist'
+        contentBase: './dist',
+        historyApiFallback: {
+          index: 'index.html'
+        },
     },
       module: {
           rules: [
