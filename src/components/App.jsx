@@ -1,5 +1,6 @@
 import React from 'react';
 import {BrowserRouter, Switch, Route, Link} from 'react-router-dom';
+import {Provider} from 'react-redux';
 
 import {MuiThemeProvider} from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
@@ -9,6 +10,8 @@ import Example from './Example';
 import MessageList from './MessageList';
 import SendMessage from './SendMessage';
 import Messages from './pages/Messages';
+import Router from './Router';
+import initStore from '../store';
 
 import '../styles/App.css';
 
@@ -86,6 +89,7 @@ export default class App extends React.Component {
     render() {
         console.log('render');
         return <main>
+            <Provider store={initStore()}>
                 <BrowserRouter>
                     {/* <MessageList messages={this.state.messages}/> */}
                     {/* <Message text={this.state.text}/> */}
@@ -101,14 +105,11 @@ export default class App extends React.Component {
                             </Grid>
                         </Grid>
                         <Grid item>
-                            <Switch>
-                                <Route exact path="/" component={Messages}/>
-                                <Route path="/chat/:chatId" render={obj => <Messages chatId={obj.match.params.chatId}/>}/>
-                                {/* <Route path='/chat/2'><Messages chatId={2}/></Route> */}
-                            </Switch>
+                            <Router/>
                         </Grid>
                     </Grid>
                 </BrowserRouter>
+            </Provider>
             </main> 
     }
 }

@@ -39,7 +39,7 @@ export default class SendMessage extends React.Component {
     };
 
     send = (event) => {
-        event.preventDefault();
+        //event.preventDefault();
         this.props.send({message: this.state.message, author: 'me'});
         this.setState({message: ''});
     };
@@ -48,7 +48,8 @@ export default class SendMessage extends React.Component {
 
     render() {
         // const classes = useStyles();
-        return <form>
+        return <div>
+            {this.state.message}
             {/* <TextField 
                        value={this.state.message}
                        onChange={this.handleChange} 
@@ -57,15 +58,15 @@ export default class SendMessage extends React.Component {
                     //    rows={5}
                        name={'message'}
                     /> */}
-            <TextField
-                id="standard-multiline-flexible"
+            <input
+                // id="standard-multiline-flexible"
                 // label="Multiline"
                 // multiline
                 // rowsMax={4}
                 value={this.state.message}
-                onChange={this.handleChange}
+                onChange={event => this.setState({message: event.target.value})}
                 />
-            <button onClick={this.send}>Send</button>
-        </form>;
+            <span onClick={this.send}>Send</span>
+        </div>;
     }
 }
