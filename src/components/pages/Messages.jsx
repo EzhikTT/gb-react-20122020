@@ -54,24 +54,35 @@ class Messages extends React.Component {
         
         this.props.sendMessage(objMsg.message, objMsg.author, this.props.chatId);
 
-        const chats = {...this.state.chats};
+        const chats = {...this.props.chatsStore};
         chats[this.props.chatId].messages.push(newMesId);
         // debugger
         this.setState({chats: {...chats}});
     };
 
+    componentDidUpdate(prevProps, prevState) {
+        if(prevProps.messagesStore.length < this.props.messagesStore.length && 
+            this.props.messagesStore[this.props.messagesStore.length - 1].author === 'me'){
+                setTimeout(
+                    () => this.send({message: 'I\'m robot', author: 'robot'}),
+                    1000
+                );
+        }
+    }
+
     render() {
         // Если messages - словарь, то фильтрация другая: this.state.chats[this.props.chatId].messages.map(item => this.state.messages[item])
         return <>
             <h2>{this.state.chats[this.props.chatId].name}</h2>
-            <MessageList messages={this.props.messagesStore.filter(({id}) => this.state.chats[this.props.chatId].messages.includes(id))}/>
+            <MessageList messages={this.props.messagesStore.filter(({id}) => this.props.chatsStore[this.props.chatId].messages.includes(id))}/>
             <SendMessage send={this.send}/>
         </>;
     }
 }
 
 const mapStateToProps = store => ({
-    messagesStore: store.messageReducer 
+    messagesStore: store.messageReducer,
+    chatsStore: store.chats 
 });
 
 const mapDispatchToProps = {

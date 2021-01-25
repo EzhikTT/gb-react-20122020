@@ -15,8 +15,9 @@ const initState = [
 export default function messagesReducer(store = initState, action) {
     switch(action.type){
         case SEND_MESSAGE:
+            console.log(action);
             const newMesId = store.length;
-            return [...store, {message: action.message, author: message.author, id: newMesId, chatId: action.chatId}];
+            return [...store, {message: action.message, author: action.author, id: newMesId, chatId: action.chatId}];
         default: 
             return store;
     }

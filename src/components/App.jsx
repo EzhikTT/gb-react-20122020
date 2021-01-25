@@ -1,6 +1,7 @@
 import React from 'react';
 import {BrowserRouter, Switch, Route, Link} from 'react-router-dom';
 import {Provider} from 'react-redux';
+import {ConnectedRouter} from 'connected-react-router';
 
 import {MuiThemeProvider} from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
@@ -11,7 +12,7 @@ import MessageList from './MessageList';
 import SendMessage from './SendMessage';
 import Messages from './pages/Messages';
 import Router from './Router';
-import initStore from '../store';
+import initStore, {history} from '../store';
 
 import '../styles/App.css';
 
@@ -90,7 +91,7 @@ export default class App extends React.Component {
         console.log('render');
         return <main>
             <Provider store={initStore()}>
-                <BrowserRouter>
+                <ConnectedRouter history={history}>
                     {/* <MessageList messages={this.state.messages}/> */}
                     {/* <Message text={this.state.text}/> */}
                     {/* <Example /> */}
@@ -108,8 +109,8 @@ export default class App extends React.Component {
                             <Router/>
                         </Grid>
                     </Grid>
-                </BrowserRouter>
+                </ConnectedRouter>
             </Provider>
-            </main> 
+        </main>;
     }
 }
