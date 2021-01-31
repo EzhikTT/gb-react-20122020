@@ -1,3 +1,6 @@
-import messageMiddleware from './messages';
+import {apiMiddleware} from 'redux-api-middleware';
 
-export default [messageMiddleware];
+import messagesMiddleware from './messages';
+import chatsMiddleware from './chats';
+
+export default [apiMiddleware, chatsMiddleware, messagesMiddleware];

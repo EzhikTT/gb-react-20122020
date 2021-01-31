@@ -1,9 +1,6 @@
 import {SEND_MESSAGE, sendMessage} from '../actions/message';
 export default store => next => action => {
-
     const dispatch = store.dispatch;
-    const messages = store.getState().messageReducer;
-    // debugger
     switch(action.type){
         case SEND_MESSAGE:
             if(action.author === 'me'){
@@ -17,12 +14,3 @@ export default store => next => action => {
     }
     return next(action);
 };
-
-/**
- * function (store) {
- *   return function(next) {
- *     return function(action){
- *     }; 
- *   };
- * }
- */
