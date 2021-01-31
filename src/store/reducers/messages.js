@@ -1,4 +1,4 @@
-import {SEND_MESSAGE} from '../actions/message';
+import {SEND_MESSAGE, SET_MESSAGES} from '../actions/message';
 
 const initState = [
     {message: 'message 0', author: 'robot', id: 0},
@@ -15,9 +15,11 @@ const initState = [
 export default function messagesReducer(store = initState, action) {
     switch(action.type){
         case SEND_MESSAGE:
-            console.log(action);
+            // console.log(action);
             const newMesId = store.length;
             return [...store, {message: action.message, author: action.author, id: newMesId, chatId: action.chatId}];
+        case SET_MESSAGES:
+            return [...action.messages];
         default: 
             return store;
     }

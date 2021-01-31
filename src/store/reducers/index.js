@@ -7,7 +7,7 @@ import chatReducer from './chat';
 export default history => combineReducers({
     router: connectRouter(history),
     messageReducer,
-    chats: chatReducer /// store.chats | store.getState().chats
+    // chats: chatReducer /// store.chats | store.getState().chats
 });
 
  // store.getState() => {router: {....}, messageReducer: {....}, chats: {....}}

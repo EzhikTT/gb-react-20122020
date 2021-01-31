@@ -1,5 +1,21 @@
-const log1 = () => console.log('Useless function default');
+function some(a, b, c, d, callback){
+    // some code 
+    res = a+b+c+d;
+    callback(res);
+}
 
-export function log(){console.log('Useless fucntion not default')};
+const prom = () => new Promise((resolve, reject) => {
+    setTimeout(
+        () => {
+            if(Math.round(Math.random() * 10) % 3 === 0){
+                return reject('не повезло');
+            }
+            else {
+                return resolve('повезло');
+            }
+        },
+        2000
+    );
+});
 
-export default log1;
+export default prom;

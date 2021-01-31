@@ -5,15 +5,16 @@
  module.exports = {
    mode: 'development',
    entry: {
-     index: './index.jsx'
+     index: './index.jsx',
+
    },
    context: path.resolve(__dirname, 'src'),
    devtool: 'inline-source-map',
     devServer: {
         contentBase: './dist',
-        historyApiFallback: {
-          index: 'index.html'
-        },
+        // historyApiFallback: {
+          // index: 'index.html'
+        // },
     },
       module: {
           rules: [
@@ -24,7 +25,7 @@
                 loader: 'babel-loader',
                 options: {
                     presets: ['@babel/env', '@babel/react'],
-                    plugins: ['@babel/plugin-proposal-class-properties']
+                    plugins: ['@babel/plugin-proposal-class-properties', "@babel/plugin-transform-async-to-generator", "@babel/plugin-transform-runtime"]
                 }
               },
               {

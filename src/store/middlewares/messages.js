@@ -3,7 +3,7 @@ export default store => next => action => {
 
     const dispatch = store.dispatch;
     const messages = store.getState().messageReducer;
-    debugger
+    // debugger
     switch(action.type){
         case SEND_MESSAGE:
             if(action.author === 'me'){
