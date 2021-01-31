@@ -16,7 +16,7 @@ export default class MessageList extends React.Component {
 
     render() {
         return <div className={'messages'}>
-            { this.props.messages.map(({message, author}, id) => <><Message message={message} author={author} key={`message_${id}_${Math.random()}`}/><br/></>) }
+            { this.props.messages.map(({message, author}, id) => <Message message={message} author={author} key={`message_${id}_${Math.random()}`}/>) }
         </div>;
     }
 }

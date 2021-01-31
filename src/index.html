@@ -2,9 +2,37 @@
 <html lang="en">
 <head>
     <%= htmlWebpackPlugin.tags.headTags %>
+    <link rel="manifest" href="manifest/manifest.json">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 </head>
 <body>
     <div id="root"></div>
     <!-- <script src="index.bundle.js"></script> -->
+    <script>
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', function() {
+                navigator.serviceWorker.register('/serviceWorker.js').then(function(registration) {
+                    // Registration was successful
+                    console.log('ServiceWorker успешно зарегистрирован со сферой действия: ', registration.scope);
+                    }, function(err) {
+                    // registration failed :(
+                    console.log('ServiceWorker не удалось зарегистрировать: ', err);
+                }).catch(function(err) {
+                    console.log(err)
+                });
+            });
+        } else {
+            console.log('ServiceWorker не поддерживается');
+        }
+     </script>
+     <script>
+        window.addEventListener('appinstalled', (evt) => {
+            fetch('<your_url>', {
+                method: 'GET',
+                credentials: 'include',
+            });
+        });
+      </script>
+      <script src="notification.js"></script>
 </body>
 </html>

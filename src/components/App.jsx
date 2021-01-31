@@ -12,6 +12,8 @@ import MessageList from './MessageList';
 import SendMessage from './SendMessage';
 import Messages from './pages/Messages';
 import Router from './Router';
+import IPhoneInstallPopup from './IPhoneInstallPopup';
+import PushNotificationToggle from './PushNotificationToggle';
 import initStore, {history} from '../store';
 
 import '../styles/App.css';
@@ -92,6 +94,7 @@ export default class App extends React.Component {
         return <main>
             <Provider store={initStore()}>
                 <ConnectedRouter history={history}>
+                    <PushNotificationToggle/>
                     {/* <MessageList messages={this.state.messages}/> */}
                     {/* <Message text={this.state.text}/> */}
                     {/* <Example /> */}
@@ -109,6 +112,7 @@ export default class App extends React.Component {
                             <Router/>
                         </Grid>
                     </Grid>
+                    <IPhoneInstallPopup/>
                 </ConnectedRouter>
             </Provider>
         </main>;
