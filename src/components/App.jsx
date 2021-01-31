@@ -2,6 +2,7 @@ import React from 'react';
 import {BrowserRouter, Switch, Route, Link} from 'react-router-dom';
 import {Provider} from 'react-redux';
 import {ConnectedRouter} from 'connected-react-router';
+import {PersistGate} from 'redux-persist/integration/react';
 
 import {MuiThemeProvider} from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
@@ -12,9 +13,12 @@ import MessageList from './MessageList';
 import SendMessage from './SendMessage';
 import Messages from './pages/Messages';
 import Router from './Router';
+import Menu from './Menu';
 import initStore, {history} from '../store';
 
 import '../styles/App.css';
+
+const {store, persistor} = initStore();
 
 export default class App extends React.Component {
 
@@ -90,8 +94,9 @@ export default class App extends React.Component {
     render() {
         console.log('render');
         return <main>
-            <Provider store={initStore()}>
-                <ConnectedRouter history={history}>
+            <Provider store={store}>
+                <PersistGate loading={null} persistor={persistor}>
+                    <ConnectedRouter history={history}>
                     {/* <MessageList messages={this.state.messages}/> */}
                     {/* <Message text={this.state.text}/> */}
                     {/* <Example /> */}
@@ -99,10 +104,11 @@ export default class App extends React.Component {
                     <Grid container>
                         <Grid item xs={3}>
                             <Grid container direction='column'>
-                                <Grid item><Link to='/chat/1'>Чат 1</Link></Grid>
+                                {/* <Grid item><Link to='/chat/1'>Чат 1</Link></Grid>
                                 <Grid item><Link to='/chat/2'>Чат 2</Link></Grid>
                                 <Grid item><Link to='/chat/3'>Чат 3</Link></Grid>
-                                <Grid item><Link to='/chat/4'>Чат 4</Link></Grid>
+                                <Grid item><Link to='/chat/4'>Чат 4</Link></Grid> */}
+                                <Menu></Menu>
                             </Grid>
                         </Grid>
                         <Grid item>
@@ -110,6 +116,7 @@ export default class App extends React.Component {
                         </Grid>
                     </Grid>
                 </ConnectedRouter>
+                </PersistGate>
             </Provider>
         </main>;
     }
